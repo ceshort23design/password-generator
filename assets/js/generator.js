@@ -9,6 +9,13 @@ var speChar = ['!','#','$','%','&','@','*','-','?','/',];
 function select() {
 
     var passLength = window.prompt("How many characters do you want in your password?  Please choose between 8 and 128.");
+    // passLength = parseInt(passLength);
+
+
+    if (Number.isInteger(passLength) && passLength < 8 || passLength > 128) {
+        window.alert("You entered " + passLength + ".  You must enter a number from 8 through 128. Please try again.");
+        select();
+    };
 
     var selectLower = window.confirm("Do you want to include lowercase letters?");
 
@@ -18,7 +25,7 @@ function select() {
 
     var selectSpecial = window.confirm("Do you want to include special characters (! # $ % & @ * - ? /)?");
 
-    return generate(passLength, selectLower, selectUpper, selectNumber, selectSpecial);
+    generate(passLength, selectLower, selectUpper, selectNumber, selectSpecial);
 };
 
 // GENERATE PASSWORD ARRAY
@@ -30,6 +37,11 @@ function generate(passLength, selectLower, selectUpper, selectNumber, selectSpec
     if (selectUpper) {passArray.push(upperAlpha)};
     if (selectNumber) {passArray.push(number)};
     if (selectSpecial) {passArray.push(speChar)};
+
+    if (!selectLower && !selectUpper && !selectNumber && !selectSpecial) {
+        window.alert("You must choose at least one option! Please try again.");
+        select();
+    }
 
     console.log(passArray);
 }
