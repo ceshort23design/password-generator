@@ -31,7 +31,7 @@ function select() {
             hasSpecial: selectSpecial
         }
 
-        generate(passwordSelections);
+        generateArray(passwordSelections);
 
     }
     else {
@@ -41,8 +41,7 @@ function select() {
 };
 
 // GENERATE PASSWORD ARRAY
-function generate(passwordSelections) {
-    console.log(passwordSelections);
+function generateArray(passwordSelections) {
     var passArray = [];
 
     // RANDOMLY SELECT CHARACTERS BASED ON THE USER INPUT AND PUSH TO passArray[]
@@ -76,8 +75,18 @@ function generate(passwordSelections) {
         }
 
 
+    generatePassword(passArray, passwordSelections);
+}
 
+function generatePassword(passArray, passwordSelections) {
     console.log(passArray);
+    var finalPassword = [];
+    var password = [];
+    for (var i = 0; i < passwordSelections.passwordLength; i++) {
+        password = passArray[Math.floor(Math.random() * passArray.length)];
+        finalPassword.push(password);
+    }
+    window.alert(finalPassword.join(""));
 }
 
 select();
