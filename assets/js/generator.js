@@ -9,7 +9,6 @@ var speChar = ['!','#','$','%','&','@','*','-','?','/',];
 function select() {
 
     var passLength = window.prompt("How many characters do you want in your password?  Please choose between 8 and 128.");
-    // passLength = parseInt(passLength);
 
 
     if (passLength >= 8 && passLength <= 128) {
@@ -25,7 +24,7 @@ function select() {
         }
 
         var passwordSelections = {
-            length: passLength,
+            passwordLength: passLength,
             hasLower: selectLower,
             hasUpper: selectUpper,
             hasNumber: selectNumber,
@@ -46,10 +45,35 @@ function generate(passwordSelections) {
     console.log(passwordSelections);
     var passArray = [];
 
-    if (passwordSelections.hasLower) {passArray.push(alphabet)};
-    if (passwordSelections.hasUpper) {passArray.push(upperAlpha)};
-    if (passwordSelections.hasNumber) {passArray.push(number)};
-    if (passwordSelections.hasSpecial) {passArray.push(speChar)};
+    // RANDOMLY SELECT CHARACTERS BASED ON THE USER INPUT AND PUSH TO passArray[]
+    var lowCharArray = [];
+    if (passwordSelections.hasLower) {
+        for (var i = 0; i < passwordSelections.passwordLength; i++) {
+            var lowCharArray = alphabet[Math.floor(Math.random() * alphabet.length)];
+            passArray.push(lowCharArray)};
+        }
+
+    var upCharArray = [];
+    if (passwordSelections.hasUpper) {
+        for (var i = 0; i < passwordSelections.passwordLength; i++) {
+            var upCharArray = upperAlpha[Math.floor(Math.random() * upperAlpha.length)];
+            passArray.push(upCharArray)};
+        }
+
+    var numberArray = [];
+    if (passwordSelections.hasNumber) {
+        for (var i = 0; i < passwordSelections.passwordLength; i++){
+            var numberArray = number[Math.floor(Math.random() * number.length)];
+            passArray.push(numberArray)};
+        }
+ 
+
+    var speCharArray = [];
+    if (passwordSelections.hasSpecial) {
+        for (var i = 0; i < passwordSelections.passwordLength; i++) {
+            var speCharArray = speChar[Math.floor(Math.random() * speChar.length)];
+            passArray.push(speCharArray)};
+        }
 
 
 
